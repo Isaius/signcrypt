@@ -1,0 +1,19 @@
+{
+  "name": "signcrypt",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "sucrase ./src -d ./dist --transforms typescript,imports",
+    "dev": "nodemon src/server.ts"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "typescript": "^3.9.7"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.7",
+    "nodemon": "^2.0.4",
+    "sucrase": "^3.15.0"
+  }
+}
