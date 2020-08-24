@@ -3,22 +3,21 @@ import crypto from 'crypto'
 
 class SignController {
     async sign(req: Request, res: Response) {
-        const { data } = req.body
-        const { privateKey } = req.query
+        const { data, privateKey } = req.body
 
         const sign = crypto.createSign('SHA256');
         sign.write(data);
         sign.end();
         const signature = sign.sign(privateKey, 'hex');
 
-        res.json(signature).send()
+        res.json({signature}).send()
     }
 
     async verify(req: Request, res: Response) {
-        const { publicKey, signature, content } = req.body
+        const { publicKey, signature, data } = req.body
 
         const verify = crypto.createVerify('SHA256');
-        verify.write(content);
+        verify.write(data);
         verify.end();
         const isLegit = verify.verify(publicKey, signature, 'hex');
 

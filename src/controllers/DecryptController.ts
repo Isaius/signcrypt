@@ -3,17 +3,9 @@ import { Request, Response } from 'express';
 
 class DecryptController {
     async decrypt(req: Request, res: Response) {
-        // const { privateKey } = req.query
         const { privateKey, cypherText} = req.body
-        var plainText = ''
-        
-        // const key = crypto.createPrivateKey({
-        //     key: privateKey.toString(),
-        //     format: 'pem',
-        // })
-        // console.log(key)
 
-        plainText = crypto.privateDecrypt({
+        var plainText = crypto.privateDecrypt({
             key: privateKey,
             padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
             oaepHash: 'SHA256'
