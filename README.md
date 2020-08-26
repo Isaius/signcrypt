@@ -63,51 +63,6 @@ yarn build
 }
 ```
 
-### <strong>/encrypt</strong>
-
-<strong>METHOD</strong>: `POST`<br>
-<strong>BODY</strong>: `JSON`
-
-Example: 
-
-```json
-{
-	"key": "-----BEGIN RSA PUBLIC KEY-----\n ... \n-----END RSA PUBLIC KEY-----",
-	"typeKey": "public",
-    "plainText": "Hello there everyone!"
-}
-```
-
-<strong>RESPONSE</strong>: `JSON`<br>
-
-```json
-{
-  "cypherText": "cypher text in base64"
-}
-```
-
-### <strong>/decrypt</strong>
-
-<strong>METHOD</strong>: `POST`<br>
-<strong>BODY</strong>: `JSON`
-
-Example: 
-
-```json
-{
-	"privateKey": "-----BEGIN RSA PUBLIC KEY-----\n ... \n-----END RSA PUBLIC KEY-----",
-	"cypherText": "cypher text in base64"
-}
-```
-
-<strong>RESPONSE</strong>: `JSON`<br>
-
-```json
-{
-  "plainText": "decoded cypher in plain text"
-}
-```
-
 ### <strong>/sign</strong>
 
 <strong>METHOD</strong>: `POST`<br>
