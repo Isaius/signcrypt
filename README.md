@@ -9,7 +9,7 @@ That is possible using a pair of RSA keys, one public and one private. Basically
 
 Bob then signs the message with his private RSA Key, generating a signature on the message.
 
-When Alice receives the message, to verify if it really is from Bob, she uses her public RSA key (pair of Bob's) on the signed data. If the data was modificated or not signed with Bob's key it will be detected.
+When Alice receives the message, to verify if it really is from Bob, she uses the public RSA key (pair of Bob's) on the signed data. If the data was modificated or not signed with Bob's key it will be detected.
 
 ## How to run
 
@@ -95,7 +95,7 @@ Example:
 {
 	"publicKey": "-----BEGIN RSA PUBLIC KEY-----\n ... \n-----END RSA PUBLIC KEY-----",
     "signature": "signature hash",
-    "data": "encrypted data"
+    "data": "message to verify"
 }
 ```
 
