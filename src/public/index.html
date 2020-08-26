@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="./styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="keyGen">
+        <form>
+            <div class="keysFields">
+
+                <div class="pubKey">
+                    <label for="pubKeyLabel">Chave Publica</label>
+                    <textarea type="text" name="pubKey" disabled=true class="pubKeyInput" id="pubKey"></textarea>
+                </div>
+                
+                <div class="privKey">
+                    <label for="pubKeyLabel">Chave Privada</label>
+                    <textarea type="text" multiple name="privKey" disabled=true class="privKey" id="privKey"></textarea>
+                </div>
+            </div>
+            
+            <div class="genButton">
+                <button type="button" class="keyGenButton" onclick=genKeyPair() >Generate</button>
+            </div>
+        </form>
+    </div>
+
+    
+    <dib id="box">
+        <div id="sign">
+            <h3>Assinar Mensagem</h3>
+            <form>
+                <div class="privKey">
+                    <label for="privKeyLabel">Chave Privada</label>
+                    <textarea type="text" name="privKey" class="privKeyInput" id="privKeyToSign"></textarea>
+                </div>
+    
+                <div class="messageToSignDiv">
+                    <label for="message">Mensagem</label>
+                    <input type="text" name="messageToSign" class="messageToSign" id="messageToSign">
+                </div>
+    
+                <div class="signHash">
+                    <label for="pubKeyLabel">Assinatura</label>
+                    <input type="text" name="signature" disabled=true class="signature" id="signature">
+                </div>
+                
+                <div class="signButtonDiv">
+                    <button type="button" class="signButton" onclick=signMessage() >Assinar</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="verify">
+            <h3>Verificar Assinatura</h3>
+            <form>
+                <div class="pubKey">
+                    <label for="pubKeyLabel">Chave Publica</label>
+                    <textarea type="text" name="pubKey" class="pubKeyInput" id="pubKeyToVerify"></textarea>
+                </div>
+    
+                <div class="messageToVerifyDiv">
+                    <label for="message">Mensagem</label>
+                    <textarea type="text" name="messageToVerify" class="messageToVerify" id="messageToVerify"></textarea>
+                </div>
+
+                <div class="signToVerifyDiv">
+                    <label for="signature">Assinatura</label>
+                    <textarea type="text" name="signatureToVerify" class="signatureToVerify" id="signatureToVerify"></textarea>
+                </div>
+                
+                <div class="statusDiv">
+                    <label for="statusLabel">Resultado</label>
+                    <input type="text" name="status" disabled=true class="status" id="status">
+                </div>
+
+                <div class="verifyButtonDiv">
+                    <button type="button" class="verifyButton" onclick=verifyMessage() >Verificar</button>
+                </div>
+            </form>
+            
+        </div>
+    </dib>
+    <script type="text/javascript">
+        async function genKeyPair(){
+
+            const url = 'http://localhost:3333/generation'
+            axios.get(url).then(data => {
+                x = document.getElementById('pubKey')
+                x.value = data.data.publicKey
+
+                y = document.getElementById('privKey')
+                y.value = data.data.privateKey
+                
+            })
+        }  
+
+        async function signMessage(){
+            const privateKey = document.getElementById('privKeyToSign').value
+            const data = document.getElementById('messageToSign').value
+            const url = 'http://localhost:3333/sign'
+            axios.post(url, {
+                data,
+                privateKey
+            }).then(data => {
+                x = document.getElementById('signature')
+                x.value = data.data.signature
+            })
+        } 
+
+        async function verifyMessage(){
+            const publicKey = document.getElementById('pubKeyToVerify').value
+            const data = document.getElementById('messageToVerify').value
+            const signature = document.getElementById('signatureToVerify').value
+            const url = 'http://localhost:3333/verify'
+            axios.post(url, {
+                data,
+                publicKey,
+                signature
+            }).then(data => {
+                x = document.getElementById('status')
+                x.value = 'OK'
+            })
+            .catch(err => {
+                x = document.getElementById('status')
+                x.value = 'Assinatura não bate'
+            })
+        } 
+    </script>
+</body>
+</html>
