@@ -35,7 +35,9 @@ or
 yarn dev
 ```
 
-You can also run the following commands to transpile the code to JavaScript version, that will be generated at the `/dist` folder in the projet root.
+After that the application will be runing on http://localhost:3333/
+
+You can also run the following commands to transpile the code to JavaScript version, that will be generated at the `/dist` folder in the project root, but the static files in `src/public` will not be moved, copy and paste it manually.
 
 ```sh
 npm run build
