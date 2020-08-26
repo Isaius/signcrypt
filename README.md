@@ -1,16 +1,15 @@
 ## What is it?
 
 This is an implementation of virtual signature with RSA keys. <br>
-Virtual signature is a method for verifying if an determinating data is really
-made by the user that it was made by the correct person.<br>
+Virtual signature is a method for verifying and validating the identity of the author of pieces of data on a system.<br>
 
 ### How it works
 
-That is possible using a pair of RSA keys, one public and one private. Basically, the person 1, Bob, want to send a message to a second person, Alice, on a secure way, because its the bank password.
+That is possible using a pair of RSA keys, one public and one private. Basically, the person 1, Bob, wants to send a message to a second person, Alice, in a secure way, a password for example.
 
-Bob then encrypt the password with the public RSA Key and to make sure that the message will not be modificated, sign the message with the private RSA Key.
+Bob then signs the message with his private RSA Key, generating a signature on the message.
 
-Alice, when receive the message, to verify if really is from Bob uses Bob's public key, the data and the signature (sended with the message) and if the data was modificated or not asigned with Bob's key it will be detected.
+When Alice receives the message, to verify if it really is from Bob, she uses her public RSA key (pair of Bob's) on the signed data. If the data was modificated or not signed with Bob's key it will be detected.
 
 ## How to run
 
