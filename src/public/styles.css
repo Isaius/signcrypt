@@ -6,6 +6,7 @@
 
 html, body {
     height: 100%;
+    justify-content: center;
 }
 
 * {
@@ -30,7 +31,6 @@ html, body {
 #keyGen #privKey {
     width: 30rem;
     height: 10rem;
-    margin-left: 2rem;
 }
 
 #box {
